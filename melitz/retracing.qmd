@@ -1,0 +1,462 @@
+---
+title: 'Retracing The Impact of Trade on Intra-Industry Reallocations and Aggregate Industry Productivity'
+author: 'Mauricio "Pachá" Vargas Sepúlveda'
+university: 'University of Toronto'
+department: 'Department of Political Science'
+format:
+  pdf:
+    pdf-engine: pdflatex # xelatex and other also work
+    highlight: tango # "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", "haddock"
+    template: "../tex/template.tex"
+    keep-tex: false
+bibliography: ../bib/references.bib
+csl: ../csl/chicago_manual_of_style_17th_edition_author_date.csl # Download your specific csl file and refer to it in the line below (see https://www.zotero.org/styles/)
+fontsize: 12pt
+linespacing: 1.0
+margin: 1
+paper: letterpaper # a4paper, executivepaper, legalpaper, etc also works
+customfonts: true
+sansserif: false
+amsthm: true
+outline: true
+---
+
+# About
+
+Trying to understand @melitz_impact_2003 by deducing each equation therein step-by-step.
+
+# Closed economy
+
+## Consumer demand and expenditure
+
+From the article:
+
+1. Utility: $U = \left[\int_{\omega \in \Omega} q(\omega)^{\rho} d\omega\right]^{1/\rho}$.
+2. Price aggregator: $P = \left[\int_{\omega \in \Omega} p(\omega)^{1-\sigma}\right]^{1/(1-\sigma)}$.
+3. Level of utility: $U = Q$.
+4. Elasticity of substitution: $\sigma = \frac{1}{1-\rho}$.
+
+Apply a monotone transformation $f(a) = a^{\rho}$ to maximize the same preferences. Then the Lagrangian is:
+\begin{equation}
+\label{uno}
+L = \int_{\omega \in \Omega} q(\omega)^{\rho} d\omega + \lambda\left[R - \int_{\omega \in \Omega} p(\omega) q(\omega) d\omega\right].
+\end{equation}
+
+First order condition:
+\begin{equation}
+\label{dos}
+\frac{\partial L}{\partial q(\omega)} = \rho q(\omega)^{\rho - 1} - \lambda p(\omega) = 0 \implies q(\omega) = \left[\frac{\lambda p(\omega)}{\rho}\right]^{1/(\rho - 1)}.
+\end{equation}
+
+Ratio of two varieties:
+\begin{equation}
+\label{tres}
+\frac{q(\omega_1)}{q(\omega_2)} = \left[\frac{p(\omega_1)}{p(\omega_2)}\right]^{1/(\rho - 1)}.
+\end{equation}
+
+From the elasticity of substitution, $\rho = \frac{\sigma - 1}{\sigma}$.
+
+Then, the ratio of two varieties is:
+\begin{equation}
+\label{tres}
+\frac{q(\omega_1)}{q(\omega_2)} = \left[\frac{p(\omega_1)}{p(\omega_2)}\right]^{-\sigma} \implies 
+p(\omega_1) q(\omega_1) = p(\omega_1) q(\omega_2) \left[\frac{p(\omega_1)}{p(\omega_2)}\right]^{-\sigma}
+\end{equation}
+
+\begin{equation*}
+\implies \int_{\omega \in \Omega} p(\omega_1) q(\omega_1) d\omega_1 = \int_{\omega \in \Omega} p(\omega_1) q(\omega_2) \left[\frac{p(\omega_1)}{p(\omega_2)}\right]^{-\sigma} d\omega_1
+\end{equation*}
+\begin{equation*}
+\implies R = p(\omega_2)^{\theta} q(\omega_2) \int_{\omega \in \Omega} p(\omega_1)^{1-\sigma} d\omega_1 = p(\omega_2)^{\theta} q(\omega_2) P^{1-\sigma}
+\end{equation*}
+\begin{equation*}
+\implies q(\omega_2) = R p(\omega_2)^{-\theta} P^{\sigma - 1}.
+\end{equation*}
+
+Using item 2 from the article:
+\begin{equation*}
+\implies q(\omega) = R \left[\frac{p(\omega)}{P}\right]^{-\theta} \frac{1}{P}.
+\end{equation*}
+
+Now I need to prove $R/P = Q$. Using item 1, 3 and 4 from the article and the previous result for $q(\omega)$:
+\begin{equation}
+\label{cuatro}
+U = \left[\int_{\omega \in \Omega} q(\omega)^{\rho} d\omega\right]^{1/\rho} \implies U = RP^{\sigma - 1}\left[\int_{\omega \in \Omega} p(\omega)^{1 - \rho} d\omega\right]^{\sigma/(\sigma - 1)}
+\end{equation}
+
+\begin{equation*}
+\implies U = RP^{\sigma - 1}P^{-\sigma} = \frac{R}{P}.
+\end{equation*}
+
+Replacing in $q(\omega)$:
+\begin{equation}
+\label{cinco}
+\implies q(\omega) = Q \left[\frac{p(\omega)}{P}\right]^{-\sigma}.
+\end{equation}
+
+Using the previous result:
+\begin{equation}
+\label{seis}
+p(\omega) q(\omega) = p(\omega) Q \left[\frac{p(\omega)}{P}\right]^{-\sigma} \implies r(w) = R \left[\frac{p(\omega)}{P}\right]^{1 - \sigma}.
+\end{equation}
+
+## Production and profit
+
+From the article:
+
+1. Cost of production (fixed cost + output / productivity): $l(q) = f + q/\phi$.
+2. CES constant markup: $\frac{\sigma}{\sigma - 1} = \frac{1}{\rho}$.
+3. Pricing rule: $p(\phi) = \frac{w}{\rho \phi}$.
+4. Profit: $\pi(\phi) = \frac{r(q)}{\sigma} - f$.
+
+Profit:
+\begin{equation}
+\label{siete}
+\pi(q) = p(q) q - l(q) q = p(q) q - wf + w\frac{q}{\phi}.
+\end{equation}
+
+First order condition:
+\begin{equation}
+\label{ocho}
+\frac{\partial \pi}{\partial p} = q + p\frac{\partial q}{\partial p} - \frac{w}{\phi} \frac{\partial q}{\partial p} = 0
+\implies p = -\frac{q}{p}\frac{\partial p}{\partial q}p + \frac{w}{\phi}.
+\end{equation}
+
+Using the elasticity of substitution from the previous section:
+\begin{equation}
+\label{nueve}
+\implies p\left[1 + \frac{q}{p}\frac{\partial p}{\partial q}\right] = \implies p\left[1 - \frac{1}{\sigma}\right] = \frac{w}{\phi} \implies p = \frac{w}{\rho \phi}.
+\end{equation}
+
+Now use this in $q(\omega)$ from the previous section ($w = 1$):
+\begin{equation}
+\label{diez}
+q(\omega) = R P^{\sigma - 1} \left[\rho \phi\right]^{\sigma} \implies r(\omega) = p(\omega) q(\omega) = R \left[P \rho \phi\right]^{\sigma - 1}.
+\end{equation}
+
+Replacing this result in the profit function from item 4:
+\begin{equation}
+\label{once}
+\pi(\phi) = \frac{r(q)}{\sigma} - f = \frac{R \left[P \rho \phi\right]^{\sigma - 1}}{\sigma} - f.
+\end{equation}
+
+Using $q(\omega)$ for two varieties:
+\begin{equation}
+\label{doce}
+\frac{q(\omega_1)}{q(\omega_2)} = \left[\frac{\phi_1}{\phi_2}\right]^{\sigma}.
+\end{equation}
+
+Using $r(\omega)$ for two varieties:
+\begin{equation}
+\label{doce}
+\frac{r(\omega_1)}{r(\omega_2)} = \left[\frac{\phi_1}{\phi_2}\right]^{\sigma - 1}.
+\end{equation}
+
+## Aggregation
+
+From the article:
+
+1. M firms = M goods.
+2. Productivity: $\mu(\phi) \in (0,\infty)$.
+3. Aggregate price: $P = \left[\int_0^{\infty} p(\phi)^{1-\sigma} M\mu(\phi) d\phi \right]^{1/(1-\sigma)}$.
+4. Average productivity: $\tilde{\phi} = (\int_0^{\infty} \phi^{\sigma - 1} \mu(\phi) d\phi)^{1/(1-\sigma)}$.
+
+Replace $p(\phi)$ from item 3 in the previous section:
+
+\begin{equation}
+\label{trece}
+P = \left[\int_0^{\infty} \left[\frac{1}{\rho \sigma}\right]^{1-\sigma} M\mu(\phi) d\phi \right]^{1/(1-\sigma)}
+\implies P = M^{1/(1-\sigma)} \frac{1}{\rho (\int_0^{\infty} \phi^{\sigma - 1} \mu(\phi) d\phi)^{1/(1-\sigma)}}
+\end{equation}
+\begin{equation*}
+\implies P = M^{1/(1-\sigma)} p(\tilde{\phi}).
+\end{equation*}
+
+For a fixed utility level $U$:
+\begin{equation}
+\label{catorce}
+U = Q = \left[\int_{0}^{\infty} q(\phi)^{\rho} M\mu(\phi) d\omega\right]^{1/\rho}.
+\end{equation}
+
+From the average productivity:
+\begin{equation}
+\label{quince}
+q(\phi)^{\rho} = q(\tilde{\phi}) \left[\frac{\phi}{\tilde{\phi}}\right]^{\sigma\rho}
+\implies Q = M^{1/\rho} \left[\int_{0}^{\infty} q(\tilde{\phi}) \left[\frac{\phi}{\tilde{\phi}}\right]^{\sigma\rho} \mu(\phi) d\phi\right]^{1/\rho} = M^{1/\rho} q(\tilde{\phi}).
+\end{equation}
+
+Therefore:
+\begin{equation}
+R = PQ = Mp(\tilde{\phi})q(\tilde{\phi}) = Mr(\tilde{\phi}) \implies \Pi = M\pi(\tilde{\phi}).
+\end{equation}
+
+## Firm entry and exit
+
+From the article:
+
+1. Firm's value: $V(\phi) = \max(0, \sum_{t=0}^{\infty} (1-\delta)^t \pi(\phi)) = \max(0,\frac{\pi(\phi)}{\delta})$.
+2. Productivity distribution in equilibrium: $\mu(\phi) = \frac{g(\phi)}{1 - G(\phi)}$ when $\phi \geq \phi^*$ and 0 otherwise.
+3. Zero profit condition: $\pi(\phi) = 0 \leftrightarrow r(\phi^*) = \sigma f \leftrightarrow \bar{\pi} = fk(\phi^*)$.
+
+From $\pi(0) = -f$, $q^*$ and $\sigma^*$ must be positive because of productivity ratios.
+
+In equilibrium, $\pi(\phi^*) = 0$ and the probability of entr is: $p_{in} = 1 - G(\phi^*)$, therefore:
+\begin{equation}
+\label{dieciseis}
+\tilde{\phi} = \tilde{\phi}(\phi^*) = \frac{1}{1 - G(\phi^*)} \left[\phi^{\sigma - 1} g(\phi) d\phi \right]^{1/(\sigma - 1)}.
+\end{equation}
+
+Average revenue:
+\begin{equation}
+\label{diecisiete}
+\bar{r} = \frac{R}{M} = r(\tilde{\phi}).
+\end{equation}
+
+Using the revenue ratios:
+\begin{equation}
+\label{dieciocho}
+\frac{r(\tilde{\phi})}{r(\phi^*)} = \left[\frac{\tilde{\phi}}{\phi^*}\right]^{\sigma - 1} \implies \bar{r} = \left[\frac{\tilde{\phi}(\phi^*)}{\phi^*}\right]^{\sigma - 1} r(\phi^*).
+\end{equation}
+
+Average profit:
+\begin{equation}
+\label{diecinueve}
+\bar{\pi} = \frac{\Pi}{M} = \frac{r(\tilde{\phi})}{\sigma} - f = \left[\frac{\tilde{\phi}}{\phi^*}\right]^{\sigma - 1} \implies \bar{r} = \left[\frac{\tilde{\phi}(\phi^*)}{\phi^*}\right]^{\sigma - 1} \frac{r(\phi^*)}{\sigma} - f.
+\end{equation}
+
+As $\tilde{\phi}/{\phi^*}$ converges to 1, then the average profit is zero when $r(\phi^*) = \sigma f$, and this condition means:
+\begin{equation}
+\label{veinte}
+\bar{\pi} = f \left[\left[\frac{\tilde{\phi}}{\phi^*}\right]^{\sigma - 1} - 1\right] = fk(\phi^*) = 0.
+\end{equation}
+
+Here $k > \sigma - 1$ is important because otherwise $\left[1 - G(\phi)\right] k(\phi)$ does not necessarily decrease from above to 0 (i.e., it could break integrability conditions and the uniqueness of equilibrium).
+
+## Free entry
+
+From the article:
+
+1. Value of entry: $v_e = p_{in} \bar{v} - f_e = \frac{1 - G(\phi*)}{\delta}$.
+2. Average value of entry: $\sum_{t=0}^{\infty}(1-\delta^t) \bar{\pi} = \frac{\bar{\pi}}{\delta}$.
+
+The value of entry is zero with free entry, as it will decrease from an initial value $v_e^i >0$:
+\begin{equation}
+\label{veintiuno}
+v_e = 0 \implies \bar{\pi} = \frac{\delta f_e}{1 - G(\phi^*)}.
+\end{equation}
+
+## Closed economy equilibrium
+
+From the article:
+
+1. Average profit: $\bar{\pi} = fk(\sigma^*) = \frac{\delta f_e}{1 - G(\phi^*)}$.
+2. Mass of firms: $p_{in} M_e = \delta M$.
+3. Labour payment for production and investment: $L = L_p + L_e$.
+4. Labour payment for production: $L_p = R - \Pi$.
+
+From the previous conditions on profits I have to solve
+\begin{equation}
+\bar{\pi} = fk(\sigma^*) = \frac{\delta f_e}{1 - G(\phi^*)}.
+\end{equation}
+
+The mass of firms can be written using the value of entry:
+\begin{equation}
+p_{in} M_e = \delta M \implies (1 - G(\phi^*)) M_e = \delta M.
+\end{equation}
+
+Payment on investment labour:
+\begin{equation}
+L_e = M_e f_e = \frac{\delta M}{1 - G(\phi^*)} f_e =\bar{\pi} M  = \Pi.
+\end{equation}
+
+Total revenue:
+\begin{equation}
+R = L_p + \Pi = L_p + L_e = L.
+\end{equation}
+
+Using $\bar{r}$ from free entry, I have that $M = R / \bar{r}$ and then:
+\begin{equation*}
+\bar{\pi} = \left[\frac{\tilde{\phi}(\phi^*)}{\phi^*}\right]^{\sigma - 1} \frac{r(\phi^*)}{\sigma} - f \implies \bar{\pi} = \sigma(\bar{\pi} + f).
+\end{equation*}
+\begin{equation}
+\implies M = \frac{R}{\sigma(\bar{\pi} + f)}.
+\end{equation}
+
+Using the price from production section:
+\begin{equation}
+\label{veintidos}
+P = M^{1/(1-\sigma)} p(\tilde{\sigma}) = \frac{M^{1/(1-\sigma)}}{\rho \phi} = \left[\frac{L}{\sigma(\bar{\pi} + f)}\right]^{1/(1-\sigma)} \frac{1}{\rho \phi}.
+\end{equation}
+
+## Analysis of the equilibrium
+
+\begin{equation}
+W  = \frac{w}{P} = \frac{1}{P} = M^{1/(\sigma - 1)} \rho \tilde{\phi}.
+\end{equation}
+
+# Open economy
+
+## Equilibrium
+
+From the article:
+
+1. $p_d(\phi) = w / \rho\phi = 1 / \rho\phi$.
+2. $p_x(\phi) = \tau p_d(\phi)$ and $\tau > 1$.
+3. $r_d(\phi) = R\left[P\rho\phi\right]^{\sigma - 1}$.
+4. $r_x(\phi) = \tau^{1-\sigma} r_d(\phi)$.
+5. $r(\phi) = r_d(\phi)$ without exports or $r(\phi) = r_d(\phi) + nr_x(\phi)$ exporting to all countries.
+
+Due to iceberg costs:
+\begin{equation}
+\label{veintitres}
+r_x(\phi) = R\left[P\rho\frac{\phi}{\tau}\right]^{\sigma - 1} = \tau^{1-\sigma} R\left[P\rho\phi\right]^{\sigma - 1} = \tau^{1-\sigma} r_d(\phi).
+\end{equation}
+\begin{equation}
+\label{veinticuatro}
+\implies r_d(\phi) + nr_x(\phi) = \left[1 + n\tau^{1-\sigma}\right] r_d(\phi).
+\end{equation}
+
+## Firm entry, exit and export status
+
+From the article:
+
+1. Investment cost: $f_{x}$.
+2. Amortized cost: $f_x = \delta f_{ex}$.
+3. The export cost is the same for all countries.
+4. Export decision occurs after firm knows its productivity $\phi$.
+5. $f_x$ is fixed per period and country.
+
+$f_x$ means that the firm exports in all periods to all countries or do not export at all, leading to profits:
+
+1. $\pi_d(\phi) = \frac{r_d(\phi)}{\sigma} - f$
+2. $\pi_x(\phi) = \frac{r_x(\phi)}{\sigma} - f$
+
+Knowing the productivity:
+\begin{equation}
+\label{veinticinco}
+\pi(\phi) = \pi_d(\phi) + \max(0, \pi_x(\phi)).
+\end{equation}
+
+## Firm entry, exit and export status (part 2)
+
+From the article:
+
+1. Domestic productivity: $\phi^* = \inf(\phi : v(\phi) > 0)$.
+2. International productivity: $\phi_x^{*} = \inf(\phi : \phi \geq \phi^*, \pi_x(\phi) > 0)$.
+3. Profit: $\pi(\phi) = \pi_d(\phi) + n\pi_x(\phi)$.
+
+If $\phi_x^* = \phi^*$, all firms export but also $\pi_d = \pi_x = 0$.
+
+If $\phi_x^* > \phi^*$, some firms export but also $\pi_d = \pi_x = 0$.
+
+If $\phi_x^* < \phi^*$, it is an unfeasible case that never happens because $\tau > 1$.
+
+Also, $\tau^{\sigma - 1} f_x > f$ leads to $\phi_x^* > \phi$.
+
+## Firm entry, exit and export status (part 3)
+
+From the article:
+
+1. Productivity: $\mu(\sigma) = g(\phi) / \left[1 - G(\phi^*)\right]$ when $\phi^* > \phi$ and 0 otherwise.
+
+Similar to closed economy, the probability of entry is
+\begin{equation}
+\label{veintiseis}
+p_{in} = 1 - G(\phi^*) = 1, p_x = \frac{1 - G_x(\sigma^*)}{1 - G_x(\phi)}.
+\end{equation}
+
+## Firm entry, exit and export status (part 4)
+
+From the article:
+
+1. Exporting firms: $M_x = p_x M$.
+
+\begin{equation}
+\label{veintisiete}
+M_t = M + nM_x = \left[1 + p_x n\right]M.
+\end{equation}
+
+## Aggregation
+
+Using the average productivity and the aggregated price from the closed economy:
+\begin{equation}
+P = M_t^{1 / (1 - \sigma)} p(\tilde{\sigma_t}) = M_t^{1 / (1 - \sigma)} \frac{1}{\rho \tilde{\phi_t}}.
+\end{equation}
+
+With average productivity $\tilde{\phi_t}$:
+\begin{equation}
+\tilde{\phi_x} = \tilde{\phi_x}(\phi^*) = \frac{1}{1 - G(\phi_x^*)} \left[\int_{\phi_x^*}^{\infty} \sigma^{\sigma - 1} g(\phi) d\phi\right]^{1/(\sigma - 1)}.
+\end{equation}
+
+Then the average productivity is:
+\begin{equation}
+\tilde{\phi_t} = \frac{1}{M_t} \left[M\left[\tilde{\phi}(\phi^*)\right]^{\sigma - 1} + nM_x\left[\frac{\tilde{\phi_x}(\phi^*)}{\tau}\right]^{\sigma - 1}\right]^{1 / (\sigma - 1)}.
+\end{equation}
+
+Using the average revenue, $R = M_t r_d(\phi)$ and then:
+\begin{equation}
+\bar{r} = \frac{R}{M} = \frac{M_t r_d(\phi)}{M} = r_d\left[\tilde{\phi}(\phi^*) + np_x r_x \tilde{\phi}(\phi_x^*)\right].
+\end{equation}
+
+Using the reasoning for productivity and revenue:
+\begin{equation}
+\bar{\pi} = \pi_d(\tilde{\phi}(\phi^*)) + np_x r_x \tilde{\phi}(\phi^*).
+\end{equation}
+
+## Equilibrium
+
+Similar to closed economy, the zero profit condition means:
+\begin{equation}
+\pi_d(\tilde{\phi}(\phi^*)) = f\left[\left[\frac{\tilde{\phi}(\phi^*)}{\phi^*}\right]^{\sigma - 1} - 1\right].
+\end{equation}
+\begin{equation}
+\pi_x(\tilde{\phi}(\phi_x^*)) = f_x\left[\left[\frac{\tilde{\phi}(\phi_x^*)}{\phi_x^*}\right]^{\sigma - 1} - 1\right].
+\end{equation}
+
+Aggregate profit:
+\begin{equation}
+\bar{\pi} = f\left[\left[\frac{\tilde{\phi}(\phi^*)}{\phi^*}\right]^{\sigma - 1} - 1\right] + np_x f_x\left[\left[\frac{\tilde{\phi}(\phi_x^*)}{\phi_x^*}\right]^{\sigma - 1} - 1\right].
+\end{equation}
+
+Profit ratio:
+
+1. $r_x(\phi^*) = \tau^{1-\sigma}\left[\phi_x^*\right]^{\sigma - 1}$.
+2. $r_d(\phi^*) = \left[\phi^*\right]^{\sigma - 1}$.
+
+From the profit ratio:
+\begin{equation}
+\frac{r_x}{r_d} = \tau^{1-\sigma}\left[\frac{\phi_x^*}{\phi^*}\right]^{\sigma - 1} = \frac{f_x}{f} \implies \phi_x^* = \tau \phi^* \left[\frac{f_x}{f}\right]^{1 / (\sigma - 1)}
+\end{equation}
+
+With $\bar{\pi} = \delta f_e / p_{in}$ (article) and $v_e$ the long profit is zero, meaning that the average profit is:
+\begin{equation}
+\bar{\pi} = f\left[\left[\frac{\tilde{\phi}(\phi^*)}{\phi^*}\right]^{\sigma - 1} - 1\right] + np_x f_x\left[\left[\frac{\tilde{\phi}(\phi_x^*)}{\phi_x^*}\right]^{\sigma - 1} - 1\right].
+\end{equation}
+
+## Determination of the equilibrium
+
+From the closed economy case, $R = L$ and $p_{in} M_e = \delta M$, therefore the mass of firms is:
+\begin{equation}
+M = \frac{R}{\bar{r}} = \frac{R}{\sigma \left[\bar{\pi} + f + np_xf_x\right]}.
+\end{equation}
+
+## Impact of trade
+
+From from closed economy case, the autarky cutoff $\phi_a^*$ is.
+
+If $\phi^* > \phi_a^*$, then firms with productivity $\phi_a^* \leq \phi < \phi^*$ have $\pi < 0$ and exit.
+
+But also $\bar{\pi} > \bar{\pi_a}$ and in particular $\left[1+np_x\right]M < M_a$, meaning that:
+\begin{equation}
+\frac{M}{M_a} < \frac{1}{1 + np_x} < 1.
+\end{equation}
+
+## Reallocation of resources
+
+From from closed economy case, if $\phi^* \geq \phi_x^*$:
+\begin{equation}
+\Delta \pi(\phi) = \phi^{\sigma - 1} f \left[\frac{1 + n\tau^{1 - \sigma}}{\left[\sigma^*\right]^{\sigma - 1}} - \frac{1}{\left[\phi_a^*\right]^{\sigma - 1}}\right] - nf_x
+\implies \pi(\phi^*) \geq 0.
+\end{equation}
+
+# References
